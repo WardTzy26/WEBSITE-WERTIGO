@@ -19,16 +19,17 @@
 
         
     </head>
-    <body>
+    <body class="bdy">
 
         <section class="index" id="index">
         <header class="header">
-            <a href="home.html" class="logo" id="menu"><span> WerTigo </span></a>
+            <a href="home.html" class="logo" id="menu"><img src="LOGO.png" class="log"><span> WerTigo </span></a>
            
             <i class="fa-solid fa-bars" id="menu-icon"></i>
             <nav class="navbar">
                <a href="home.html" class="active"><span>Home </span></a>
-               <a href="#about"> <span>About</span></a>
+               <a href="home.html#signin"> <span>Sign Up/Sign In</span></a>
+               <a href="home.html#about"> <span>About us</span></a>
                <a href="#services"> <span>Services</span> </a>
                <a href="#contact"> <span>Contact</span></a>
             </nav>
@@ -40,11 +41,16 @@
     <!-- Right Side -->
 
     
-    <div class="right-panel">
+    <div class="right-panel" id="right-panel">
         <div class="navigation">
             <div></div> <!-- Empty div for layout -->
             <div class="iti">
-            <img src="NAV.png" height="90%" width="90%" class="nav-pic">
+            <img src="NAV.png" height="70%" width="70%" class="nav-pic">
+            <br>
+            <div class="des">
+            <img src="PICNIC.jpg" height="100px" width="100px" class="dest">
+            <img src="SKY.jpg" height="100px" width="100px" class="dest">
+            </div>
             <br>
             <br>
             <br>
@@ -82,6 +88,8 @@
     </div>
 </div>
 -->
+
+<!--Left Panel-->
         <div class="chat-button" id="chatButton">
             <i class="fas fa-comments"></i>
         </div>
@@ -92,7 +100,7 @@
                     <div class="logo">WerTigo</div>
                     <div class="tagline">Now what is your plan?</div>
                 </div>
-                <div class="chat-header-actions">
+                <!-- <div class="chat-header-actions">
                     <button class="header-button" id="minimizeButton">
                         <i class="fas fa-minus"></i>
                     </button>
@@ -100,6 +108,7 @@
                         <i class="fas fa-times"></i>
                     </button>
                 </div>
+                -->
             </div>
             
             <div class="chat-messages" id="chatMessages">
@@ -365,6 +374,133 @@
     // Call initialization functions
     initAIChat();
 });
+
+/*signin/signup error handling*/
+
+// Get the form elements
+const signUpForm = document.getElementById('signUpForm');
+const signInForm = document.getElementById('signInForm');
+
+// Sign Up form fields and error messages
+const signUpUsername = document.getElementById('signUpUsername');
+const signUpEmail = document.getElementById('signUpEmail');
+const signUpPassword = document.getElementById('signUpPassword');
+
+const signUpUsernameError = document.getElementById('signUpUsernameError');
+const signUpEmailError = document.getElementById('signUpEmailError');
+const signUpPasswordError = document.getElementById('signUpPasswordError');
+
+// Sign In form fields and error messages
+const signInEmail = document.getElementById('signInEmail');
+const signInPassword = document.getElementById('signInPassword');
+
+const signInEmailError = document.getElementById('signInEmailError');
+const signInPasswordError = document.getElementById('signInPasswordError');
+
+// Sign Up form validation
+signUpForm.addEventListener('submit', (e) => {
+  e.preventDefault(); // Prevent form submission
+
+  let valid = true;
+
+  // Validate Username
+  if (signUpUsername.value.trim() === "") {
+    signUpUsernameError.textContent = "Username is required.";
+    signUpUsernameError.style.display = 'block';
+    valid = false;
+  } else {
+    signUpUsernameError.style.display = 'none';
+  }
+
+  // Validate Email
+  const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+  if (!emailPattern.test(signUpEmail.value)) {
+    signUpEmailError.textContent = "Please enter a valid email.";
+    signUpEmailError.style.display = 'block';
+    valid = false;
+  } else {
+    signUpEmailError.style.display = 'none';
+  }
+
+  // Validate Password
+  if (signUpPassword.value.trim() === "") {
+    signUpPasswordError.textContent = "Password is required.";
+    signUpPasswordError.style.display = 'block';
+    valid = false;
+  } else {
+    signUpPasswordError.style.display = 'none';
+  }
+
+  if (valid) {
+    // Submit the form if validation passes
+    alert('Sign Up Successful');
+    signUpForm.submit(); // Or your form submission logic here
+  }
+});
+
+// Sign In form validation
+signInForm.addEventListener('submit', (e) => {
+  e.preventDefault(); // Prevent form submission
+
+  let valid = true;
+
+  // Validate Email
+  if (!emailPattern.test(signInEmail.value)) {
+    signInEmailError.textContent = "Please enter a valid email.";
+    signInEmailError.style.display = 'block';
+    valid = false;
+  } else {
+    signInEmailError.style.display = 'none';
+  }
+
+  // Validate Password
+  if (signInPassword.value.trim() === "") {
+    signInPasswordError.textContent = "Password is required.";
+    signInPasswordError.style.display = 'block';
+    valid = false;
+  } else {
+    signInPasswordError.style.display = 'none';
+  }
+
+  if (valid) {
+    // Submit the form if validation passes
+    alert('Sign In Successful');
+    signInForm.submit(); // Or your form submission logic here
+  }
+});
+
+document.addEventListener("DOMContentLoaded", function() {
+    // Get reference to chat container
+    const chatContainer = document.getElementById("chatContainer");
+    
+    // Apply animation styles programmatically
+    chatContainer.style.transform = "translateX(-100%)";
+    chatContainer.style.animation = "slideInFromLeft 0.8s ease-out forwards";
+    
+    // Add the keyframes for the animation if they don't exist in your CSS already
+    if (!document.getElementById("chat-animation-keyframes")) {
+        const styleSheet = document.createElement("style");
+        styleSheet.id = "chat-animation-keyframes";
+        styleSheet.textContent = `
+            @keyframes slideInFromLeft {
+                0% {
+                    transform: translateX(-100%);
+                    opacity: 0;
+                }
+                100% {
+                    transform: translateX(0);
+                    opacity: 1;
+                }
+            }
+        `;
+        document.head.appendChild(styleSheet);
+    }
+});
+
+
+
+
+
         </script>
 
 

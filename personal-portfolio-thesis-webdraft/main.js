@@ -46,7 +46,7 @@ window.onscroll = () => {
                 {
                     links.classList.remove('active');
 
-                    document.querySelector('header nav a[href*=' + id + ']').classList.add('active');
+                    document.querySelector('header nav a[href"=' + id + '"]').classList.add('active');
             });
         };
     });
@@ -77,6 +77,32 @@ ScrollReveal().reveal('.home-content h1, .about-img', {origin:'left'});
 ScrollReveal().reveal('.home-contact p, about-content', {origin: 'right'});
 ScrollReveal().reveal('.skills', {origin:'right'});
 ScrollReveal().reveal('')
+
+
+/*sign up/ sign in pop up*/
+
+// Get the elements
+const signUpBox = document.getElementById('signUpBox');
+const signInBox = document.getElementById('signInBox');
+const toggleToSignUp = document.getElementById('toggleToSignUp');
+const toggleToSignIn = document.getElementById('toggleToSignIn');
+
+// Initially show the Sign In box and hide the Sign Up box
+signUpBox.style.display = 'none'; // Hide the sign up form initially
+
+// When the user clicks on "Don't have an account? Sign Up", show the sign up form
+toggleToSignUp.addEventListener('click', () => {
+  signUpBox.style.display = 'block';
+  signInBox.style.display = 'none'; // Hide the sign in form
+});
+
+// When the user clicks on "Already have an account? Sign In", show the sign in form
+toggleToSignIn.addEventListener('click', () => {
+  signInBox.style.display = 'block';
+  signUpBox.style.display = 'none'; // Hide the sign up form
+});
+
+
 
 
 /* typed js */
